@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WanAndroidKt</string>
+    <string name="home_page">首页</string>
+    <string name="tab_mine">我的</string>
+</resources>

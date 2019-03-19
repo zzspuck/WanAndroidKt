@@ -2,7 +2,6 @@ package com.zzs.wanandroidkt.base
 
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.inputmethod.InputMethodManager
 import com.gyf.barlibrary.ImmersionBar
 import me.yokeyword.fragmentation.SupportActivity
@@ -20,8 +19,8 @@ abstract class BaseActivity : SupportActivity() {
         getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         initImmersionBar()
         initData()
@@ -30,7 +29,7 @@ abstract class BaseActivity : SupportActivity() {
 
     abstract fun getLayoutId(): Int
 
-    open protected fun initImmersionBar() {
+    protected open fun initImmersionBar() {
         immersionBar = ImmersionBar.with(this)
         immersionBar.init()
     }
@@ -55,7 +54,7 @@ abstract class BaseActivity : SupportActivity() {
             imm.hideSoftInputFromWindow(it.windowToken, 2) }
     }
 
-    protected fun initData(){}
+    open fun initData(){}
 
-    protected fun initView(){}
+    open fun initView(){}
 }

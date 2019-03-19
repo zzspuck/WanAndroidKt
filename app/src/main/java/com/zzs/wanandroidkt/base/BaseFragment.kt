@@ -74,14 +74,14 @@ abstract class BaseFragment : SupportFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val titleBar = view.findViewById<View>(setTitleBar())
+      /*  val titleBar = view.findViewById<View>(setTitleBar())
         if (titleBar != null) {
             ImmersionBar.setTitleBar(mActivity, titleBar)
         }
         val statusBarView = view.findViewById<View>(setStatusBarView())
         if (statusBarView != null) {
             ImmersionBar.setStatusBarView(mActivity, statusBarView)
-        }
+        }*/
         initData()
         initView()
     }

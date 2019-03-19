@@ -1,19 +1,29 @@
 package com.zzs.wanandroidkt.ui.fragment
 
+import android.os.Bundle
+import com.zzs.wanandroidkt.R
 import com.zzs.wanandroidkt.base.BaseFragment
 
 /**
  * @author: zzs
  * @date: 2019/3/17
  */
-class MainFragment : BaseFragment(){
+class MainFragment : BaseFragment() {
+
+    companion object {
+        fun newInstance(): MainFragment {
+            val bundle = Bundle()
+            val mainFragment = MainFragment()
+            mainFragment.arguments = bundle
+            return mainFragment
+        }
+    }
 
     override fun cancelRequest() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getLayoutId(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return R.layout.fragment_main
     }
 
 }

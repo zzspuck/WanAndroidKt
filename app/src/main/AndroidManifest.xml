@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.zzs.wanandroidkt">
+          xmlns:tools="http://schemas.android.com/tools" package="com.zzs.wanandroidkt">
 
     <application
             android:allowBackup="true"
@@ -10,7 +10,8 @@
             android:supportsRtl="true"
             android:resizeableActivity="true"
             android:maxAspectRatio="2.4"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
         <meta-data
                 android:name="android.max_aspect"
                 android:value="2.4" />

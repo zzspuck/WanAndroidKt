@@ -17,7 +17,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
         android:paddingTop="@dimen/dp_10"
-        app:srcCompat="@drawable/ic_launcher_foreground"
+        app:srcCompat="@mipmap/ic_launcher"
         tools:ignore="ContentDescription"/>
 
     <TextView
@@ -37,6 +37,6 @@
         android:layout_gravity="end"
         android:textColor="@color/white"
         android:theme="@style/Theme.AppCompat.Light"
-        tools:text="退出"/>
+        tools:text="@string/logout"/>
 
 </LinearLayout>

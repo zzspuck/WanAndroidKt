@@ -2,4 +2,9 @@
     <string name="app_name">WanAndroidKt</string>
     <string name="home_page">首页</string>
     <string name="tab_mine">我的</string>
+    <string name="my_like">我喜欢的</string>
+    <string name="my_about">关于我</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">其他</string>
+    <string name="logout">退出</string>
 </resources>

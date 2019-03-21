@@ -47,9 +47,9 @@ abstract class BaseFragment : SupportFragment() {
 
     protected abstract fun getLayoutId(): Int
 
-    protected fun initData() {}
+    protected open fun initData() {}
 
-    protected fun initView() {}
+    protected open fun initView() {}
 
     override fun onSupportVisible() {
         super.onSupportVisible()

@@ -1,5 +1,7 @@
 package com.zzs.wanandroidkt.Constant
 
+import android.widget.Toast
+
 /**
  * Constant
  *
@@ -18,4 +20,15 @@ object Constant {
      * Debug
      */
     const val INTERCEPTOR_ENABLE = false
+
+    const val LOGIN_KEY ="login"
+
+    const val USERNAME_KEY = "username"
+    const val PASSWORD_KEY= "password"
+
+    /**
+     * Toast
+     */
+    @JvmField
+    var showToast: Toast? = null
 }

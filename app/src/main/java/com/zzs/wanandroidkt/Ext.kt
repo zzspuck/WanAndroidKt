@@ -1,6 +1,10 @@
 package com.zzs.wanandroidkt
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
+import com.zzs.wanandroidkt.Constant.Constant
 
 /**
  * @author: zzs
@@ -32,4 +36,20 @@ fun encodeCookie(cookies: List<String>): String {
 
 fun loge(tag: String, content: String?) {
     Log.e(tag, content ?: tag)
+}
+
+/**
+ * show toast
+ * @param content String
+ */
+@SuppressLint("ShowToast")
+fun Context.toast(content: String) {
+    Constant.showToast?.apply {
+        setText(content)
+        show()
+    } ?: run {
+        Toast.makeText(this.applicationContext, content, Toast.LENGTH_SHORT).apply {
+            Constant.showToast = this
+        }.show()
+    }
 }

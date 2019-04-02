@@ -31,4 +31,9 @@ object Constant {
      */
     @JvmField
     var showToast: Toast? = null
+
+    /**
+     * result null
+     */
+    const val RESULT_NULL = "result null!"
 }

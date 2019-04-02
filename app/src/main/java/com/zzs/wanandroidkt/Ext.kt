@@ -5,6 +5,8 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.zzs.wanandroidkt.Constant.Constant
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Deferred
 
 /**
  * @author: zzs
@@ -52,4 +54,20 @@ fun Context.toast(content: String) {
             Constant.showToast = this
         }.show()
     }
+}
+
+inline fun tryCatch(catchBlock: (Throwable) -> Unit = {}, tryBlock: () -> Unit) {
+    try {
+        tryBlock()
+    } catch (_: CancellationException) {
+
+    } catch (t: Throwable) {
+        catchBlock(t)
+    }
+}
+
+fun Deferred<Any>?.cancelByActivity() = this?.run {
+    tryCatch { if (isActive) {
+        cancel()
+    } }
 }

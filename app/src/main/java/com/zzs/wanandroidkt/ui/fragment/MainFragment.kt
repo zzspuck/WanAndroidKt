@@ -2,11 +2,9 @@ package com.zzs.wanandroidkt.ui.fragment
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.AppCompatButton
-import android.view.MenuItem
 import android.widget.TextView
 import com.zzs.wanandroidkt.Constant.Constant
 import com.zzs.wanandroidkt.R
@@ -14,19 +12,28 @@ import com.zzs.wanandroidkt.base.BaseFragment
 import com.zzs.wanandroidkt.base.Preference
 import com.zzs.wanandroidkt.toast
 import kotlinx.android.synthetic.main.fragment_main.*
+import me.yokeyword.fragmentation.SupportFragment
 
 /**
  * @author: zzs
  * @date: 2019/3/17
  */
 class MainFragment : BaseFragment() {
+
+    val FIRST = 0
+    val SECOND = 1
+    val THIRD = 2
+    private val mFragments = arrayOfNulls<SupportFragment>(3)
+    override fun initData() {
+    }
+
     private lateinit var navigationViewUsername: TextView
 
     private lateinit var navigationViewLogout: AppCompatButton
 
     private val isLogin: Boolean by Preference(Constant.LOGIN_KEY, false)
 
-    private val username:String by Preference(Constant.USERNAME_KEY, "")
+    private val username: String by Preference(Constant.USERNAME_KEY, "")
 
 
     companion object {
@@ -41,12 +48,32 @@ class MainFragment : BaseFragment() {
     override fun cancelRequest() {
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val firstFragment = findChildFragment(HomeFragment::class.java)
+        if (firstFragment == null) {
+            mFragments[FIRST] = HomeFragment.newInstance()
+            mFragments[SECOND] = HomeFragment.newInstance()
+            mFragments[THIRD] = HomeFragment.newInstance()
+
+            loadMultipleRootFragment(
+                R.id.content, FIRST,
+                mFragments[FIRST],
+                mFragments[SECOND],
+                mFragments[THIRD]
+            )
+        } else {
+            mFragments[FIRST] = firstFragment
+            mFragments[SECOND] = findChildFragment(HomeFragment::class.java)
+            mFragments[THIRD] = findChildFragment(HomeFragment::class.java)
+        }
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_main
     }
 
     override fun initView() {
-        super.initView()
 
         toolbar.run {
             title = getString(R.string.app_name)
@@ -68,19 +95,17 @@ class MainFragment : BaseFragment() {
         }
 
         navigationView.run {
-            setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener {
-                override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                    return when (item.itemId) {
-                        R.id.nav_like ->
-                            true
-                        R.id.nav_about ->
-                            true
-                        else ->
-                            true
-                    }
+            setNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.nav_like ->
+                        true
+                    R.id.nav_about ->
+                        true
+                    else ->
+                        true
                 }
-            })
-            drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            drawerLayout.openDrawer(GravityCompat.START)
         }
 
         navigationViewUsername = navigationView.getHeaderView(0)
@@ -90,7 +115,7 @@ class MainFragment : BaseFragment() {
         navigationViewUsername.run {
             if (!isLogin) {
                 text = "还没有登录"
-            } else{
+            } else {
                 text = username
             }
         }
@@ -98,14 +123,14 @@ class MainFragment : BaseFragment() {
         navigationViewLogout.run {
             text = if (!isLogin) {
                 "点击登录"
-            }else{
+            } else {
                 "退出"
             }
 
             setOnClickListener {
                 if (!isLogin) {
                     activity?.toast("请填写登录界面")
-                }  else{
+                } else {
                     Preference.clear()
                     navigationViewUsername.text = "退出登录成功"
                 }
@@ -116,10 +141,14 @@ class MainFragment : BaseFragment() {
     private val onNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_home ->
+                R.id.navigation_home -> {
+                    showHideFragment(mFragments[FIRST])
                     return@OnNavigationItemSelectedListener true
-                R.id.navigation_type ->
+                }
+                R.id.navigation_type -> {
+                    showHideFragment(mFragments[SECOND])
                     return@OnNavigationItemSelectedListener true
+                }
             }
             false
         }

@@ -1,5 +1,5 @@
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.zzs.wanandroidkt.Constant.Constant
 import com.zzs.wanandroidkt.base.Preference
 import com.zzs.wanandroidkt.encodeCookie

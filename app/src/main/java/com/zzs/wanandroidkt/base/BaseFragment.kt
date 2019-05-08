@@ -47,9 +47,9 @@ abstract class BaseFragment : SupportFragment() {
 
     protected abstract fun getLayoutId(): Int
 
-    protected open fun initData() {}
+    protected abstract fun initData()
 
-    protected open fun initView() {}
+    protected abstract fun initView()
 
     override fun onSupportVisible() {
         super.onSupportVisible()
@@ -74,14 +74,6 @@ abstract class BaseFragment : SupportFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      /*  val titleBar = view.findViewById<View>(setTitleBar())
-        if (titleBar != null) {
-            ImmersionBar.setTitleBar(mActivity, titleBar)
-        }
-        val statusBarView = view.findViewById<View>(setStatusBarView())
-        if (statusBarView != null) {
-            ImmersionBar.setStatusBarView(mActivity, statusBarView)
-        }*/
         initData()
         initView()
     }

@@ -9,4 +9,7 @@
     <string name="logout">退出</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_sign_in_short">sign_in</string>
+    <string name="login_register">注册</string>
+    <string name="login_login">登录</string>
 </resources>

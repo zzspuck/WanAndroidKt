@@ -1,5 +1,6 @@
 package com.zzs.wanandroidkt.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.GravityCompat
@@ -10,7 +11,7 @@ import com.zzs.wanandroidkt.Constant.Constant
 import com.zzs.wanandroidkt.R
 import com.zzs.wanandroidkt.base.BaseFragment
 import com.zzs.wanandroidkt.base.Preference
-import com.zzs.wanandroidkt.toast
+import com.zzs.wanandroidkt.ui.activity.LoginActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 import me.yokeyword.fragmentation.SupportFragment
 
@@ -129,7 +130,9 @@ class MainFragment : BaseFragment() {
 
             setOnClickListener {
                 if (!isLogin) {
-                    activity?.toast("请填写登录界面")
+                    Intent(activity, LoginActivity::class.java).run {
+                        startActivityForResult(this, Constant.MAIN_REQUEST_CODE)
+                    }
                 } else {
                     Preference.clear()
                     navigationViewUsername.text = "退出登录成功"
@@ -152,5 +155,17 @@ class MainFragment : BaseFragment() {
             }
             false
         }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            Constant.MAIN_REQUEST_CODE -> {
+                if (resultCode == RESULT_OK) {
+                    navigationViewUsername.text = data?.getStringExtra(Constant.CONTENT_TITLE_KEY)
+                    navigationViewLogout.text = "退出登录"
+                }
+            }
+        }
+    }
 
 }

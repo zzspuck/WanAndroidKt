@@ -46,7 +46,7 @@ class HomeModelImpl : HomeModel {
         loginWanAndroidAsync?.cancelByActivity()
     }
 
-    override fun registerWandroid(
+    override fun registerWanAndroid(
         onRegisterListener: HomePresenter.OnRegisterListener,
         username: String,
         password: String,

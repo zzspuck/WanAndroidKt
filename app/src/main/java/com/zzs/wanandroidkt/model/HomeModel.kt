@@ -21,7 +21,7 @@ interface HomeModel {
 
     fun cancelLoginRequest()
 
-    fun registerWandroid(
+    fun registerWanAndroid(
         onRegisterListener: HomePresenter.OnRegisterListener,
         username: String,
         password: String,

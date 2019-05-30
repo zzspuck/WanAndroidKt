@@ -36,4 +36,11 @@ object Constant {
      * result null
      */
     const val RESULT_NULL = "result null!"
+
+    /**
+     * title key
+     */
+    const val CONTENT_TITLE_KEY = "title"
+
+    const val MAIN_REQUEST_CODE = 100
 }

@@ -118,7 +118,7 @@ class HomeFragment : BaseFragment(), HomeFragmentView, OnRefreshListener, OnLoad
     }
 
     override fun cancelRequest() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        homeFragmentPresenter.cancelRequest()
     }
 
     override fun getLayoutId(): Int {

@@ -31,4 +31,27 @@ interface RetrofitService {
         @Field("password") password: String,
         @Field("repassword") repassword:String
     ):Deferred<LoginResponse>
+
+    /**
+     * 收藏文章
+     * @param id id
+     * @return Deferred<HomeListResponse>
+     */
+    @POST("/lg/collect/{id}/json")
+    fun addCollectArticle(
+        @Path("id") id: Int
+    ): Deferred<HomeListResponse>
+
+    /**
+     * 删除收藏文章
+     * @param id id
+     * @param originId -1
+     * @return Deferred<HomeListResponse>
+     */
+    @POST("/lg/uncollect/{id}/json")
+    @FormUrlEncoded
+    fun removeCollectArticle(
+        @Path("id") id: Int,
+        @Field("originId") originId: Int = -1
+    ): Deferred<HomeListResponse>
 }

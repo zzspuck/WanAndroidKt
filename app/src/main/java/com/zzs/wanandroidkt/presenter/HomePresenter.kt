@@ -42,4 +42,15 @@ public interface HomePresenter {
 
         fun registerFailed(errorMessage:String?)
     }
+
+    interface OnCollectArticleListener{
+        /**
+         * 添加收藏
+         */
+        fun collectArticle(id:Int, isAdd:Boolean)
+
+        fun collectArticleSuccess(result: HomeListResponse, isAdd: Boolean)
+
+        fun collectArticleFailed(errorMessage:String?, isAdd:Boolean)
+    }
 }

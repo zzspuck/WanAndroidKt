@@ -12,4 +12,9 @@
     <string name="action_sign_in_short">sign_in</string>
     <string name="login_register">注册</string>
     <string name="login_login">登录</string>
+    <string name="share_title">分享</string>
+    <string name="like_title">喜欢</string>
+    <string name="browser_title">用系统浏览器打开</string>
+    <string name="share_article_url">%1$s分享【%2$s】：%3$s</string>
+    <string name="login_please_login">请登录</string>
 </resources>

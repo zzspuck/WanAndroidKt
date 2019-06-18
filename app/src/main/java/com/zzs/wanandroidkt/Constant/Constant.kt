@@ -37,10 +37,24 @@ object Constant {
      */
     const val RESULT_NULL = "result null!"
 
+    const val MAIN_REQUEST_CODE = 100
+
+    /**
+     * url key
+     */
+    const val CONTENT_URL_KEY = "url"
     /**
      * title key
      */
     const val CONTENT_TITLE_KEY = "title"
 
-    const val MAIN_REQUEST_CODE = 100
+    /**
+     * id key
+     */
+    const val CONTENT_ID_KEY = "id"
+
+    /**
+     * share key
+     */
+    const val CONTENT_SHARE_TYPE = "text/plain"
 }

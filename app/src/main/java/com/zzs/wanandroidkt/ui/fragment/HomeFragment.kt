@@ -1,5 +1,6 @@
 package com.zzs.wanandroidkt.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -15,8 +16,12 @@ import com.zzs.wanandroidkt.base.BaseFragment
 import com.zzs.wanandroidkt.base.Preference
 import com.zzs.wanandroidkt.bean.Datas
 import com.zzs.wanandroidkt.bean.HomeListResponse
+import com.zzs.wanandroidkt.presenter.ContentPresenterImpl
 import com.zzs.wanandroidkt.presenter.HomeFragmentPresenterImpl
 import com.zzs.wanandroidkt.toast
+import com.zzs.wanandroidkt.ui.activity.ContentActivity
+import com.zzs.wanandroidkt.ui.activity.LoginActivity
+import com.zzs.wanandroidkt.view.CollectArticleView
 import com.zzs.wanandroidkt.view.HomeFragmentView
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -26,7 +31,14 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * @author: zzs
  * @date: 2019/4/3
  */
-class HomeFragment : BaseFragment(), HomeFragmentView, OnRefreshListener, OnLoadMoreListener {
+class HomeFragment : BaseFragment(), HomeFragmentView, CollectArticleView, OnRefreshListener, OnLoadMoreListener {
+    override fun collectArticleSuccess(result: HomeListResponse, isAdd: Boolean) {
+
+    }
+
+    override fun collectArticleFailed(errorMessage: String?, isAdd: Boolean) {
+    }
+
     /**
      * 当前页数
      */
@@ -68,7 +80,14 @@ class HomeFragment : BaseFragment(), HomeFragmentView, OnRefreshListener, OnLoad
     private val datas = mutableListOf<Datas>()
 
     private val homeFragmentPresenter: HomeFragmentPresenterImpl by lazy {
-        HomeFragmentPresenterImpl(this)
+        HomeFragmentPresenterImpl(this, this)
+    }
+
+    /**
+     * presenter
+     */
+    private val collectArticlePresenter: ContentPresenterImpl by lazy {
+        ContentPresenterImpl(this)
     }
 
     private val homeAdapter: HomeAdapter by lazy {
@@ -97,14 +116,14 @@ class HomeFragment : BaseFragment(), HomeFragmentView, OnRefreshListener, OnLoad
     }
 
     override fun getHomeListFailed(errorMessage: String?) {
-        if (page==0) {
+        if (page == 0) {
             refresh_layout.finishRefresh(false)
-        } else{
+        } else {
             refresh_layout.finishLoadMore(false)
         }
         errorMessage?.let {
             activity?.toast(it)
-        }?:let {
+        } ?: let {
             activity?.toast("Failed to get the data")
         }
     }
@@ -149,8 +168,19 @@ class HomeFragment : BaseFragment(), HomeFragmentView, OnRefreshListener, OnLoad
     }
 
     private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        if (activity== null) {
+            return@OnItemClickListener
+        }
         if (datas.size != 0) {
             // 点击进入详情
+            if (datas.size != 0) {
+                val url = datas[position].link
+                val id = datas[position].id
+                val title = datas[position].title
+                context?.let {
+                    ContentActivity.openActiviey(context!!, url, id, title)
+                }
+            }
         }
     }
 
@@ -165,14 +195,23 @@ class HomeFragment : BaseFragment(), HomeFragmentView, OnRefreshListener, OnLoad
                             return@OnItemChildClickListener
                         }
                         // 跳转 文章类型页面
-                        activity?.toast("跳转文章类型页面")
+                        activity?.let {
+                            it.toast("文章类型页面")
+                        }
 
                     }
                     R.id.homeItemLike -> {
                         if (isLogin) {
-                            activity?.toast("调用收藏接口")
+                            val collect = data.collect
+                            data.collect = !collect
+                            homeAdapter.setData(position, data)
+                            collectArticlePresenter.collectArticle(data.id, !collect)
                         } else {
-                            activity?.toast("跳转登录页面")
+                            activity?.let {
+                                Intent(it, LoginActivity::class.java).run {
+                                    startActivity(this)
+                                }
+                            }
                         }
                     }
                 }

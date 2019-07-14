@@ -17,4 +17,6 @@
     <string name="browser_title">用系统浏览器打开</string>
     <string name="share_article_url">%1$s分享【%2$s】：%3$s</string>
     <string name="login_please_login">请登录</string>
+    <string name="bookmark_success">收藏成功</string>
+    <string name="bookmark_cancel_success">取消收藏成功</string>
 </resources>

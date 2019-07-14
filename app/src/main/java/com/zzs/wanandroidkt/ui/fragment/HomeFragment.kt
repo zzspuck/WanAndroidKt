@@ -21,6 +21,7 @@ import com.zzs.wanandroidkt.presenter.HomeFragmentPresenterImpl
 import com.zzs.wanandroidkt.toast
 import com.zzs.wanandroidkt.ui.activity.ContentActivity
 import com.zzs.wanandroidkt.ui.activity.LoginActivity
+import com.zzs.wanandroidkt.ui.activity.TypeContentActivity
 import com.zzs.wanandroidkt.view.CollectArticleView
 import com.zzs.wanandroidkt.view.HomeFragmentView
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -32,11 +33,16 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * @date: 2019/4/3
  */
 class HomeFragment : BaseFragment(), HomeFragmentView, CollectArticleView, OnRefreshListener, OnLoadMoreListener {
-    override fun collectArticleSuccess(result: HomeListResponse, isAdd: Boolean) {
 
+    override fun collectArticleSuccess(result: HomeListResponse, isAdd: Boolean) {
+        val message: String? = if (isAdd) activity?.getString(R.string.bookmark_success) else activity?.getString(
+            R.string.bookmark_cancel_success
+        )
+        message?.let { activity?.toast(it) }
     }
 
     override fun collectArticleFailed(errorMessage: String?, isAdd: Boolean) {
+        activity?.toast("收藏失败")
     }
 
     /**
@@ -168,7 +174,7 @@ class HomeFragment : BaseFragment(), HomeFragmentView, CollectArticleView, OnRef
     }
 
     private val onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
-        if (activity== null) {
+        if (activity == null) {
             return@OnItemClickListener
         }
         if (datas.size != 0) {
@@ -196,7 +202,7 @@ class HomeFragment : BaseFragment(), HomeFragmentView, CollectArticleView, OnRef
                         }
                         // 跳转 文章类型页面
                         activity?.let {
-                            it.toast("文章类型页面")
+                            data.chapterName?.let { it1 -> TypeContentActivity.openActivity(it, data.chapterId, it1) }
                         }
 
                     }

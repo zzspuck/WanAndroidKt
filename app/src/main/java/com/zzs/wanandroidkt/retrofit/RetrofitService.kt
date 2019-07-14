@@ -1,5 +1,6 @@
 package com.zzs.wanandroidkt.retrofit
 
+import com.zzs.wanandroidkt.bean.ArticleListResponse
 import com.zzs.wanandroidkt.bean.HomeListResponse
 import com.zzs.wanandroidkt.bean.LoginResponse
 import kotlinx.coroutines.Deferred
@@ -16,21 +17,20 @@ interface RetrofitService {
     fun getHomeList(@Path("page") page: Int): Deferred<HomeListResponse>
 
 
-
     @FormUrlEncoded
     @POST("/user/login")
     fun loginWanAndroid(
         @Field("username") usrname: String,
         @Field("password") password: String
-    ):Deferred<LoginResponse>
+    ): Deferred<LoginResponse>
 
     @POST("/user/register")
     @FormUrlEncoded
     fun registerWanAndroid(
-        @Field("username") username:String,
+        @Field("username") username: String,
         @Field("password") password: String,
-        @Field("repassword") repassword:String
-    ):Deferred<LoginResponse>
+        @Field("repassword") repassword: String
+    ): Deferred<LoginResponse>
 
     /**
      * 收藏文章
@@ -54,4 +54,17 @@ interface RetrofitService {
         @Path("id") id: Int,
         @Field("originId") originId: Int = -1
     ): Deferred<HomeListResponse>
+
+    /**
+     * 2.2 知识体系下的文章
+     *
+     * http://www.wanandroid.com/article/list/0/json?cid=168
+     * @param page page
+     * @param cid cid
+     */
+    @GET("/article/list/{page}/json")
+    fun getArticleList(
+        @Path("page") page: Int,
+        @Query("cid") cid: Int
+    ): Deferred<ArticleListResponse>
 }

@@ -57,4 +57,9 @@ object Constant {
      * share key
      */
     const val CONTENT_SHARE_TYPE = "text/plain"
+
+    /**
+     * cid key
+     */
+    const val CONTENT_CID_KEY = "cid"
 }

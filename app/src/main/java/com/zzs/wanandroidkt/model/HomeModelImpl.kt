@@ -37,7 +37,9 @@ class HomeModelImpl : HomeModel {
                     onLoginListener.loginFailed(Constant.RESULT_NULL)
                     return@launch
                 }
-                onLoginListener.loginSuccess(result)
+                if (result != null) {
+                    onLoginListener.loginSuccess(result)
+                }
             })
         }
     }
@@ -64,7 +66,9 @@ class HomeModelImpl : HomeModel {
                   onRegisterListener.registerFailed(Constant.RESULT_NULL)
                   return@launch
               }
-              onRegisterListener.registerSuccess(await)
+              if (await != null) {
+                  onRegisterListener.registerSuccess(await)
+              }
           })
       }
     }
@@ -86,7 +90,9 @@ class HomeModelImpl : HomeModel {
                     onHomeListListener.getHomeListFailed(Constant.RESULT_NULL)
                     return@launch
                 }
-                onHomeListListener.getHomeListSuccess(result)
+                if (result != null) {
+                    onHomeListListener.getHomeListSuccess(result)
+                }
             }
         }
     }

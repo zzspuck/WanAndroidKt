@@ -148,7 +148,7 @@ class MainFragment : BaseFragment() {
                     showHideFragment(mFragments[FIRST])
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.navigation_type -> {
+                R.id.navigation_knowledge_system -> {
                     showHideFragment(mFragments[SECOND])
                     return@OnNavigationItemSelectedListener true
                 }

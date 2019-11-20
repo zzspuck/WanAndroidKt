@@ -19,4 +19,5 @@
     <string name="login_please_login">请登录</string>
     <string name="bookmark_success">收藏成功</string>
     <string name="bookmark_cancel_success">取消收藏成功</string>
+    <string name="knowledge_system">知识体系</string>
 </resources>

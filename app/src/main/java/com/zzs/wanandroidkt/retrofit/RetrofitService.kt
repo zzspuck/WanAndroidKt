@@ -2,6 +2,7 @@ package com.zzs.wanandroidkt.retrofit
 
 import com.zzs.wanandroidkt.bean.ArticleListResponse
 import com.zzs.wanandroidkt.bean.HomeListResponse
+import com.zzs.wanandroidkt.bean.KnowledgeSystemResponse
 import com.zzs.wanandroidkt.bean.LoginResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.*
@@ -67,4 +68,13 @@ interface RetrofitService {
         @Path("page") page: Int,
         @Query("cid") cid: Int
     ): Deferred<ArticleListResponse>
+
+
+    /**
+     * 获取知识体系列表
+     * https://www.wanandroid.com/tree/json
+     */
+    @GET("/tree/json")
+    fun getKnorledgeSystemLIst(): Deferred<KnowledgeSystemResponse>
+
 }

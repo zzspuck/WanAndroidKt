@@ -12,7 +12,7 @@ data class KnowledgeSystemResponse(
     val errorMsg: String
 ) {
 
-    data class KnowData(
+  public  data class KnowData(
         val children: List<KnowData>,
         val courseId: Int,
         val id: Int,

@@ -54,7 +54,7 @@ class MainFragment : BaseFragment() {
         val firstFragment = findChildFragment(HomeFragment::class.java)
         if (firstFragment == null) {
             mFragments[FIRST] = HomeFragment.newInstance()
-            mFragments[SECOND] = HomeFragment.newInstance()
+            mFragments[SECOND] = KnowledgeSystemFragment.newInstance()
             mFragments[THIRD] = HomeFragment.newInstance()
 
             loadMultipleRootFragment(
